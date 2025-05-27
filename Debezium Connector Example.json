@@ -1,0 +1,30 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Debezium",
+		"_postman_id": "990d427c-e8b0-49f6-0047-d99076baedc4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Connector Final",
+			"request": {
+				"url": "http://localhost:8083/connectors",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"DBTest\",\r\n  \"config\": {\r\n    \"connector.class\": \"io.debezium.connector.sqlserver.SqlServerConnector\",\r\n    \"database.hostname\": \"host.docker.internal\",\r\n    \"database.port\": \"1433\",\r\n    \"database.user\": \"debezium_user\",\r\n    \"database.password\": \"DebezKafka#1\",\r\n    \"database.names\": \"Test\",\r\n    \"database.server.name\": \"localhost\",\r\n    \"tasks.max\": \"1\",\r\n    \"schema.include.list\": \"dbo\",\r\n    \"topic.prefix\":\"localhost\",\r\n    \"database.encrypt\": \"false\",\r\n    \"database.trustServerCertificate\": \"false\",\r\n    \"schema.history.internal.kafka.topic\": \"dbz.schema.history\",\r\n\t\"schema.history.internal.kafka.bootstrap.servers\": \"kafka:9092\",\r\n\r\n\t\"key.converter\": \"org.apache.kafka.connect.json.JsonConverter\",\r\n\t\"key.converter.schemas.enable\": \"false\",\r\n\t\"value.converter\": \"io.confluent.connect.avro.AvroConverter\",\r\n\t\"value.converter.schema.registry.url\": \"http://schema-registry:8081\",\r\n\t\r\n    \"transforms\": \"filterTombstones\",\r\n    \"transforms.filterTombstones.type\": \"org.apache.kafka.connect.transforms.Filter\",\r\n    \"transforms.filterTombstones.predicate\": \"isTombstone\",\r\n    \"predicates\": \"isTombstone\",\r\n    \"predicates.isTombstone.type\": \"org.apache.kafka.connect.transforms.predicates.RecordIsTombstone\",\r\n    \r\n    \"field.name.adjustment.mode\": \"avro\",\r\n    \"schema.name.adjustment.mode\": \"avro\"\r\n  }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
