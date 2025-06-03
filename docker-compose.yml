@@ -7,7 +7,6 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "2181:2181"
-
   kafka:
     image: confluentinc/cp-kafka:latest
     container_name: kafka
@@ -34,7 +33,6 @@ services:
     environment:
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
-
   kafka-connect:
     image: debezium/connect:2.7.1.Final
     container_name: debezium
